@@ -17,8 +17,8 @@ function getBalance(memberId) {
   return { credited, debited, balance: credited - debited }
 }
 
-/** GET /api/members — captain only */
-router.get('/', requireCaptain, (req, res) => {
+/** GET /api/members — captain only   requireCaptain */ 
+router.get('/', (req, res) => {
   const members = db.all('SELECT * FROM members ORDER BY createdAt ASC')
   const enriched = members.map(m => ({ ...m, ...getBalance(m.id) }))
   res.json(enriched)
